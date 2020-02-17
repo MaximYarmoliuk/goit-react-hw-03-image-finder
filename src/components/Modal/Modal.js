@@ -20,11 +20,11 @@ export default class Modal extends Component {
   };
 
   render() {
-    const { url } = this.props;
+    const { children } = this.props;
     return (
       <div className={styles.Overlay} onClick={this.closeImageByClickOnOverloy}>
         <div className={styles.Modal}>
-          <img src={url} alt="" />
+        {children}
         </div>
       </div>
     );
@@ -32,6 +32,5 @@ export default class Modal extends Component {
 }
 
 Modal.propTypes = {
-  url: propTypes.string.isRequired,
   onCloseLargeImage: propTypes.func.isRequired
 };

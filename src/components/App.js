@@ -13,8 +13,7 @@ export default class App extends Component {
     largeImageUrl: "",
     searchQuery: "",
     page: 1,
-    loading: false,
-    visibleOverlay: false
+    loading: false
   };
 
   componentDidUpdate(prevProp, prevState) {
@@ -40,7 +39,6 @@ export default class App extends Component {
 
   closeLargeImage = () => {
     this.setState({
-      visibleOverlay: false,
       largeImageUrl: ""
     });
   };
@@ -70,16 +68,14 @@ export default class App extends Component {
     });
   };
 
-  openLargeImage = e => {
-    const url = e.target.alt;
+  openLargeImage = url => {
     this.setState({
-      visibleOverlay: true,
       largeImageUrl: url
     });
   };
 
   render() {
-    const { images, largeImageUrl, loading, visibleOverlay } = this.state;
+    const { images, largeImageUrl, loading } = this.state;
 
     return (
       <>
@@ -94,8 +90,10 @@ export default class App extends Component {
           <Button onFetchImages={this.fetchImages} />
         )}
 
-        {visibleOverlay && (
-          <Modal url={largeImageUrl} onCloseLargeImage={this.closeLargeImage} />
+        {largeImageUrl && (
+          <Modal onCloseLargeImage={this.closeLargeImage}>
+            <img src={largeImageUrl} alt="" />
+          </Modal>
         )}
       </>
     );
